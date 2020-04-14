@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cmd_signIn">Sign-in</string>
+    <string name="cmd_signOut">Sign-out</string>
+    <string name="cmd_signUp">Sign-up</string>
+    <string name="lbl_user">User</string>
+    <string name="lbl_userName">User name</string>
+    <string name="lbl_email">Email</string>
+    <string name="lbl_emailVerified">Email verified</string>
+    <string name="lbl_password">Password</string>
+    <string name="lbl_providerId">Provider ID</string>
+</resources>

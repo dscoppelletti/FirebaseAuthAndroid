@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'io.fabric'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion sdk_target
+    defaultConfig {
+        applicationId "it.scoppelletti.firebase.auth.sample"
+        minSdkVersion sdk_min
+        targetSdkVersion sdk_target
+        versionCode 1
+        versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
+        resConfigs "en", "it"
+        if (project.hasProperty('webClient.clientId')) {
+            buildConfigField 'String', 'WEBCLIENT_CLIENTID',
+                    '"' + project.property('webClient.clientId') + '"'
+        } else {
+            buildConfigField 'String', 'WEBCLIENT_CLIENTID', '"N/D"'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+            debuggable false
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    viewBinding {
+        enabled = true
+    }
+}
+
+androidExtensions {
+    features = ['parcelize']
+}
+
+configurations {
+    bom
+    implementation.extendsFrom(bom)
+    kapt.extendsFrom(bom)
+}
+
+dependencies {
+    bom platform(BOM)
+    implementation 'androidx.activity:activity-ktx'
+    implementation 'androidx.annotation:annotation'
+    implementation 'androidx.appcompat:appcompat'
+    implementation 'androidx.fragment:fragment-ktx'
+    implementation 'androidx.navigation:navigation-fragment-ktx'
+    implementation 'androidx.navigation:navigation-ui-ktx'
+    implementation 'com.facebook.android:facebook-android-sdk'
+    implementation 'com.facebook.android:facebook-login'
+    implementation 'com.google.android.gms:play-services-auth'
+    implementation 'com.google.android.gms:play-services-base'
+    implementation 'com.google.android.material:material'
+    implementation 'com.google.dagger:dagger'
+    kapt 'com.google.dagger:dagger-compiler'
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'io.github.microutils:kotlin-logging'
+    implementation 'it.scoppelletti.spaceship:spaceship-gms'
+    implementation 'it.scoppelletti.spaceship:spaceship-stdlib'
+    implementation 'it.scoppelletti.spaceship:spaceship-ui'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core'
+    implementation 'org.slf4j:slf4j-api'
+    runtimeOnly 'com.noveogroup.android:android-logger'
+}
