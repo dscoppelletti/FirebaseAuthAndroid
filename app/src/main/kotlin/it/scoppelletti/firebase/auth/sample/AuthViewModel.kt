@@ -124,7 +124,7 @@ class AuthViewModel : ViewModel() {
         } catch (ex: CancellationException) {
             throw ex
         } catch (ex: Exception) {
-            logger.error("Firebase Sign-Out failed.", ex)
+            logger.error("Firebase sign-out failed.", ex)
         }
 
         try {
@@ -132,7 +132,7 @@ class AuthViewModel : ViewModel() {
         } catch (ex: CancellationException) {
             throw ex
         } catch (ex: Exception) {
-            logger.error("Google Sign-Out failed.", ex)
+            logger.error("Google sign-out failed.", ex)
         }
 
         try {
@@ -140,7 +140,7 @@ class AuthViewModel : ViewModel() {
         } catch (ex: CancellationException) {
             throw ex
         } catch (ex: Exception) {
-            logger.error("Facebook Sign-Out failed.", ex)
+            logger.error("Facebook sign-out failed.", ex)
         }
 
         _cmd.value = SingleEvent(AuthCommand.Finish)
